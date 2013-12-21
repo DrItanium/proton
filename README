@@ -1,3 +1,6 @@
 proton is a frontend for both raw electron as well as neutron. I do not
 separate them because I frankly believe they should be together to keep the
-number of repos down.
+number of repos down. There are two programs which are generated.
+
+- proton is a wrapper over electron
+- quark is a wrapper over neutron
