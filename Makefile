@@ -11,10 +11,10 @@ options:
 fs:
 	@echo Generating filesystem
 	@echo "(deffacts donuts (root electron \"$(PROTON_ROOT)\"))" > /tmp/generate-startup-script.input
-	@electron -f2 cmd/generate-startup-script.clp >> proton
+	@electron -f2 cmd/generate-startup-script.clp > proton
 	@chmod +x proton
 	@echo "(deffacts donuts (root neutron \"$(PROTON_ROOT)\"))" > /tmp/generate-startup-script.input
-	@electron -f2 cmd/generate-startup-script.clp >> quark
+	@electron -f2 cmd/generate-startup-script.clp > quark
 	@chmod +x quark
 	@rm /tmp/generate-startup-script.input
 	@cp cmd/entry-template.clp entry.clp

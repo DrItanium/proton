@@ -4,8 +4,8 @@
  ?f <- (root ?program ?location)
  =>
  (retract ?f)
- (format t "#!/bin/bash%n# Root is '%s'%nelectron -f2 \"%s/entry.clp\" $@%n"
-  ?location ?location))
+ (format t "#!/bin/bash%n# Root is '%s'%n%s -f2 \"%s/entry.clp\" $@%n"
+  ?location ?program ?location))
 
 (batch* lib/reset-run-exit.clp)
 
