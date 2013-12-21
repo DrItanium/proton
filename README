@@ -1,3 +1,3 @@
-The electron platform is a merger of the electron-filesystem, electron,
-efssrv, and chicanery. It will be updated as time goes on with new tools but 
-this is a centralized project to create a development platform
+proton is a frontend for both raw electron as well as neutron. I do not
+separate them because I frankly believe they should be together to keep the
+number of repos down.

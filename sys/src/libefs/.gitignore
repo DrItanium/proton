@@ -1,6 +1,0 @@
-*.o
-*.swp
-config.h
-libefssrv.so
-libefssrv.a
-libefs.a
