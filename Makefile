@@ -18,7 +18,6 @@ fs:
 	@chmod +x quark
 	@rm /tmp/generate-startup-script.input
 	@cp cmd/entry-template.clp entry.clp
-	@echo "(batch* \"$(PROTON_ROOT)/lib/mount.clp\")" >> entry.clp
 	@echo "(defmountpoint proton \"$(PROTON_ROOT)\")" >> entry.clp
 
 install:
