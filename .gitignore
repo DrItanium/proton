@@ -1,5 +1,5 @@
-sys/bin
-sys/lib
-sys/share/man
 *.o 
 *.swp
+proton
+quark
+entry.clp
