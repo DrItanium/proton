@@ -11,19 +11,19 @@ options:
 fs:
 	@echo Generating filesystem
 	@echo "(deffacts donuts (root electron \"$(PROTON_ROOT)\"))" > /tmp/generate-startup-script.input
-	@electron -f2 cmd/generate-startup-script.clp > proton
-	@chmod +x proton
+	@electron -f2 cmd/generate-startup-script.clp > src/proton
+	@chmod +x src/proton
 	@rm /tmp/generate-startup-script.input
-	@cp cmd/entry-template.clp entry.clp
-	@echo "(defmountpoint proton \"$(PROTON_ROOT)\")" >> entry.clp
+	@cp cmd/entry-template.clp src/entry.clp
+	@echo "(defmountpoint proton \"$(PROTON_ROOT)\")" >> src/entry.clp
 
-install:
+install: 
 	@echo Installing filesystem components
 	@mkdir -p $(PREFIX)/bin
-	@cp proton $(PREFIX)/bin
+	@cp src/proton $(PREFIX)/bin
 	@mkdir -p $(PROTON_ROOT)
-	@cp -r lib/ $(PROTON_ROOT)
-	@cp entry.clp $(PROTON_ROOT)
+	@cp -r src/lib/ $(PROTON_ROOT)
+	@cp src/entry.clp $(PROTON_ROOT)
 
 uninstall:
 	@echo Uninstalling filesystem components
@@ -32,4 +32,4 @@ uninstall:
 
 clean:
 	@echo Cleaning
-	@rm -f entry.clp proton
+	@rm -f src/entry.clp src/proton

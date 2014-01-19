@@ -7,5 +7,5 @@
  (format t "#!/bin/bash%n# Root is '%s'%n%s -f2 \"%s/entry.clp\" $@%n"
   ?location ?program ?location))
 
-(batch* lib/reset-run-exit.clp)
+(batch* src/lib/reset-run-exit.clp)
 
