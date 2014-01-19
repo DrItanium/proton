@@ -13,9 +13,6 @@ fs:
 	@echo "(deffacts donuts (root electron \"$(PROTON_ROOT)\"))" > /tmp/generate-startup-script.input
 	@electron -f2 cmd/generate-startup-script.clp > proton
 	@chmod +x proton
-	@echo "(deffacts donuts (root neutron \"$(PROTON_ROOT)\"))" > /tmp/generate-startup-script.input
-	@electron -f2 cmd/generate-startup-script.clp > quark
-	@chmod +x quark
 	@rm /tmp/generate-startup-script.input
 	@cp cmd/entry-template.clp entry.clp
 	@echo "(defmountpoint proton \"$(PROTON_ROOT)\")" >> entry.clp
@@ -23,16 +20,16 @@ fs:
 install:
 	@echo Installing filesystem components
 	@mkdir -p $(PREFIX)/bin
-	@cp proton quark $(PREFIX)/bin
+	@cp proton $(PREFIX)/bin
 	@mkdir -p $(PROTON_ROOT)
 	@cp -r lib/ $(PROTON_ROOT)
 	@cp entry.clp $(PROTON_ROOT)
 
 uninstall:
 	@echo Uninstalling filesystem components
-	@rm $(PREFIX)/bin/proton $(PREFIX)/bin/quark
+	@rm $(PREFIX)/bin/proton 
 	@rm -rf $(PROTON_ROOT)
 
 clean:
 	@echo Cleaning
-	@rm -f entry.clp quark proton
+	@rm -f entry.clp proton
