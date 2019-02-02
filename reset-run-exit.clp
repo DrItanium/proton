@@ -1,3 +1,4 @@
+;------------------------------------------------------------------------------
 ; proton
 ; Copyright (c) 2013-2019, Joshua Scoggins 
 ; All rights reserved.
@@ -20,20 +21,12 @@
 ; ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 ; (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 ; SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-(deftemplate stage
-             "Stage control fact, used to separate groups of rules and introduce order"
-             (slot current
-                   (type SYMBOL)
-                   (default ?NONE))
-             (multislot rest
-                        (type SYMBOL)))
-
-(defrule next-stage
-         "Advance to the next stage"
-         (declare (salience -10000))
-         ?f <- (stage (rest ?next $?rest))
-         =>
-         (modify ?f
-                 (current ?next)
-                 (rest ?rest)))
+;------------------------------------------------------------------------------
+; reset-run-exit.clp - Calls reset, run, and then exits. This is useful for 
+;                      expert systems that are meant to run and then exit
+; 
+; Obviously, this prevent shell access.
+;------------------------------------------------------------------------------
+(reset)
+(run)
+(exit)
