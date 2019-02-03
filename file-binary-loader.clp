@@ -44,7 +44,7 @@
              (slot num-bytes-per-entry
                    (type INTEGER)
                    (range 1 ?VARIABLE)
-                   (default-dynamic 1)))
+                   (default-dynamic 16)))
 (deftemplate file-block-entry
              (slot parent 
                    (type SYMBOL)
