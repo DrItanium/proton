@@ -106,7 +106,7 @@
                                (get-char ?id))
                          (bind ?entries
                                ?entries
-                               (if (<> ?tmp -1) then ?tmp else 0)))
+                               (if (<> ?tmp -1) then ?tmp else (create$))))
          (assert (file-block-entry (parent ?id)
                                    (base-address (* ?index ?block))
                                    (contents ?entries)))
@@ -114,7 +114,7 @@
                  (index (+ ?index 1))
                  (current (get-char ?id))))
 (defrule close-file-walker
-         (stage (current read-file-and-load-lines))
+         (stage (current read-file-binary-and-load-lines))
          ?f <- (file-walker (current -1)
                             (id ?id)
                             (path ?path)
@@ -127,6 +127,7 @@
                             (bytes-per-block ?c))))
 (defrule retract-file-data
          (declare (salience -10000))
+         (stage (current read-file-binary-and-load-lines))
          ?f <- (file-data)
          =>
          (retract ?f))
