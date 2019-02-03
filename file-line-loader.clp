@@ -23,6 +23,13 @@
 
 ; Expert system fragment that will load a given file and then invoke a given function 
 ; on each line of the file. 
+(deftemplate file-data
+             (slot path
+                   (type LEXEME)
+                   (default ?NONE))
+             (slot id
+                   (type SYMBOL)
+                   (default ?NONE)))
 (deftemplate file-walker
              (slot path
                    (type LEXEME)
@@ -89,7 +96,16 @@
 (defrule close-file-walker
          (stage (current read-file-and-load-lines))
          ?f <- (file-walker (current-line EOF)
-                            (id ?id))
+                            (id ?id)
+                            (path ?path))
          =>
          (close ?id)
+         (retract ?f)
+         (assert (file-data (path ?path)
+                  (id ?id))))
+(defrule retract-file-data
+         (declare (salience -10000))
+         ?f <- (file-data)
+         =>
          (retract ?f))
+                            
