@@ -106,7 +106,11 @@
                                (get-char ?id))
                          (bind ?entries
                                ?entries
-                               (if (<> ?tmp -1) then ?tmp else (create$))))
+                               (if (<> ?tmp -1) then ?tmp else 0)))
+         ; the following code body will cause clips 6.40 to infinite loop with files that are not of an even length
+         ;(bind ?entries
+         ;      ?entries
+         ;      (if (<> ?tmp -1) then ?tmp else (create$))))
          (assert (file-block-entry (parent ?id)
                                    (base-address (* ?index ?block))
                                    (contents ?entries)))
