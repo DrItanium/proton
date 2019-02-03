@@ -88,6 +88,8 @@
                              (contents (explode$ ?val)))))
 (defrule close-file-walker
          (stage (current read-file-and-load-lines))
-         ?f <- (file-walker (current-line EOF))
+         ?f <- (file-walker (current-line EOF)
+                            (id ?id))
          =>
+         (close ?id)
          (retract ?f))
