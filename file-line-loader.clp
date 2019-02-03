@@ -81,7 +81,7 @@
          =>
          (modify ?f
                  (line-number (+ ?index 1))
-                 (current-line (readline ?val)))
+                 (current-line (readline ?id)))
          (assert (line-entry (parent ?id)
                              (index ?index)
                              (line ?val)
