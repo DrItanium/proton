@@ -44,18 +44,18 @@
                    (type SYMBOL)
                    (default-dynamic (gensym*))))
 (deftemplate line-entry
-  (slot parent 
-        (type SYMBOL)
-        (default ?NONE))
-  (slot index
-        (type INTEGER)
-        (range 0 ?VARIABLE)
-        (default ?NONE))
-  (slot line
-        (type LEXEME)
-        (default ?NONE))
-  (multislot contents 
-             (default ?NONE)))
+             (slot parent 
+                   (type SYMBOL)
+                   (default ?NONE))
+             (slot index
+                   (type INTEGER)
+                   (range 0 ?VARIABLE)
+                   (default ?NONE))
+             (slot line
+                   (type LEXEME)
+                   (default ?NONE))
+             (multislot contents 
+                        (default ?NONE)))
 (defrule open-file-for-reading
          (declare (salience 10000))
          (stage (current read-file-and-load-lines))
@@ -73,4 +73,21 @@
            (printout stderr
                      "Could not open " ?path " for reading!" crlf)))
 
-(defrule 
+(defrule make-line-entry
+         (stage (current read-file-and-load-lines))
+         ?f <- (file-walker (current-line ?val&~EOF)
+                            (line-number ?index)
+                            (id ?id))
+         =>
+         (modify ?f
+                 (line-number (+ ?index 1))
+                 (current-line (readline ?val)))
+         (assert (line-entry (parent ?id)
+                             (index ?index)
+                             (line ?val)
+                             (contents (explode$ ?val)))))
+(defrule close-file-walker
+         (stage (current read-file-and-load-lines))
+         ?f <- (file-walker (current-line EOF))
+         =>
+         (retract ?f))
